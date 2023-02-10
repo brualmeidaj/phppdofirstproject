@@ -1,7 +1,13 @@
 <?php
-    $pdo = new PDO('mysql:localhost;dbname=root', 'user', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=root', 'user', '');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
     //Insert
+    if(isset($_POST['nome'])){
+        $sql = $pdo->prepare("INSERT INTO clientes VALUES (null,?,?)");
+        $sql->execute(array($_POST['nome'],$_POST['email']));
+        echo 'Formulário preenchido com sucesso :)';
+    }
 ?>
 
 <form method="post">
